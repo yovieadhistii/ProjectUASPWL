@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use \App\Http\Controllers\MahasiswaController;
 
 Route::get('/', function() {
     return redirect(route('login'));
@@ -22,4 +23,6 @@ Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/mahasiswa',[MahasiswaController::class,'index'])->name('dashboardmahasiswa');
 });
+
