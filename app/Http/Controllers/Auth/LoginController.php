@@ -40,7 +40,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if($user->role == 'prodi') {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboardprodi');
         }
         return redirect()->route('dashboardmahasiswa');
     }

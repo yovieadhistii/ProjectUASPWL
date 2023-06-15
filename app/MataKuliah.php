@@ -3,18 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MataKuliah extends Model
 {
-    protected $table  ='mata_kuliah';
+    protected $table = 'mata_kuliah';
+    public function program_studi(): BelongsTo
+    {
+        return $this->belongsTo(ProgramStudi::class);
+    }
+    public function mk_tawar(): HasMany
 
-    protected $primaryKey = 'kodes';
-
-    protected $fillable =[
-        'kodes',
-        'nama',
-        'sks',
-        'semester',
-        'program_studi_kode_prodi'
-    ];
+    {
+        return $this->hasMany(MkTawar::class);
+    }
 }
