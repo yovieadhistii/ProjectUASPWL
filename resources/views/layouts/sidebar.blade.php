@@ -16,7 +16,7 @@
                 <img src="{{asset('img/user-photo-default.png')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->nama}} | {{Auth::user()->role}}</a>
+                <a href="{{route('profil')}}" class="d-block">{{Auth::user()->nama}} | {{Auth::user()->role}}</a>
             </div>
         </div>
         @endauth
