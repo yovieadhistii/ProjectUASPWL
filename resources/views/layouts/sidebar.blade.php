@@ -16,7 +16,7 @@
                 <img src="{{asset('img/user-photo-default.png')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->name}} | {{Auth::user()->role}}</a>
+                <a href="#" class="d-block">{{Auth::user()->nama}} | {{Auth::user()->role}}</a>
             </div>
         </div>
         @endauth
@@ -26,6 +26,12 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="{{route('dashboard')}}" class="nav-link">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('perwalian')}}" class="nav-link">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
