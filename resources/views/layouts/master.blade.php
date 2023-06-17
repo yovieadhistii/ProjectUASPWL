@@ -20,9 +20,13 @@
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
 	<div class="wrapper">
+        @include('layouts.navbar')
+        @if (Session::get('IsProdi'));
+            @include('layouts.sidebarprodi')
+        @else
+            @include('layouts.sidebar')
+        @endif
 
-		@include('layouts.navbar')
-		@include('layouts.sidebar')
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">

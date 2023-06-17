@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use \App\Http\Controllers\MahasiswaController;
-use \App\Http\Controllers\DashboardProdiController;
-use App\Http\Controllers\MataKuliahController;
+use \App\Http\Controllers\UserController;
 
 Route::get('/', function() {
     return redirect(route('login'));
@@ -25,13 +23,9 @@ Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/mahasiswa',[MahasiswaController::class,'index'])->name('dashboardmahasiswa');
-    Route::get('/perwalian',[MataKuliahController::class,'index'])->name('perwalian');
-    Route::get('/Prodi/dashboardProdi', [DashboardProdiController::class,'index'])->name('dashboardProdi');
-    Route::get('/Prodi/create',[DashboardProdiController::class,'create'])->name('createProdi');
-    Route::post('/Prodi/create',[DashboardProdiController::class,'store'])->name('storeProdi'); 
-    Route::get('/matkul/dashboard', [MataKuliahController::class,'index'])->name('lihatMK');
-    Route::get('/matkul/create', [MataKuliahController::class,'create'])->name('createMK');
-    Route::post('/matkul/create',[MataKuliahController::class,'store'])->name('storeMK'); 
+    Route::get('/mahasiswa',[UserController::class,'index'])->name('dashboardmahasiswa')->middleware('mahasiswa');
+    Route::get('/prodi',[UserController::class,'index_prodi'])->name('dashboardprodi')->middleware('prodi');
+    Route::get('/test',[UserController::class,'test'])->name('test');
+//    Route::get('/perwalian',[UserController::class,'index'])->name('perwalian');
 });
 
