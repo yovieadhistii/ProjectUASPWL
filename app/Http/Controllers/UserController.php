@@ -23,10 +23,9 @@ class UserController extends Controller
             'dkbs' => $data,
         ]);
     }
-    public function test()
+    public function profil()
     {
-        $data = MkTawar::with('mata_kuliah')->get();
-        dd($data);
+        return view('mahasiswa.profil');
     }
     public function index_prodi()
     {
@@ -71,12 +70,15 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        //
+//        dd($user);
+        return view('mahasiswa/editprofil', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -88,7 +90,27 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        return $request->file('image')->store('profile-photo');
+        $validateData = $request->validate([
+            'nama' => 'required|max:255',
+            'phone'=>'required|max:255',
+        ]);
+        $user->nama = $validateData['nama'];
+        $user->telepon = $validateData['phone'];
+        $user->save();
+        return redirect(route('dashboardmahasiswa'));
+    }
+    public function updatephoto(Request $request, User $user)
+    {
+//        dd($request);
+//        return $request->file('image')->store('profile-photo');
+        $validateData = $request->validate([
+            'image'=>'required|image|file|max:1024'
+        ]);
+        $validateData['image']=$request->file('image')->store('profile-photo');
+        $user->foto = $validateData['image'];
+        $user->save();
+        return redirect(route('editProfile',['id'=>$user->id]));
     }
 
     /**
