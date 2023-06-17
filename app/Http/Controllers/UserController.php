@@ -23,6 +23,11 @@ class UserController extends Controller
             'dkbs' => $data,
         ]);
     }
+    public function test()
+    {
+        $data = MkTawar::with('mata_kuliah')->get();
+        dd($data);
+    }
     public function index_prodi()
     {
         return view('prodi.dashboard');

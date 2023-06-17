@@ -31,7 +31,7 @@
 {{--                    </a>--}}
 {{--                </li>--}}
                 <li class="nav-item">
-                    <a href="{{route('dashboardmahasiswa')}}" class="nav-link">
+                    <a href="{{route('dashboardprodi')}}" class="nav-link">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>Dashboard</p>
                     </a>
