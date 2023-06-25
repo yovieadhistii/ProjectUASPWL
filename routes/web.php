@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use \App\Http\Controllers\UserController;
+
+use App\Http\Controllers\GenreController;
 
 Route::get('/', function() {
     return redirect(route('login'));
@@ -23,13 +24,12 @@ Auth::routes(['verify' => false, 'reset' => false]);
 
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/mahasiswa',[UserController::class,'index'])->name('dashboardmahasiswa')->middleware('mahasiswa');
-    Route::get('/profil',[UserController::class,'profil'])->name('profil');
-    Route::get('/profil/edit/{user}',[UserController::class,'edit'])->name('editProfile');
-    Route::post('/profil/edit/{user}',[UserController::class,'update'])->name('updateProfile');
-    Route::post('/profil/editphoto/{user}',[UserController::class,'updatephoto'])->name('updateProfilePhoto');
-    Route::get('/prodi',[UserController::class,'index_prodi'])->name('dashboardprodi')->middleware('prodi');
-    Route::get('/test',[UserController::class,'test'])->name('test');
-//    Route::get('/perwalian',[UserController::class,'index'])->name('perwalian');
+    Route::get('/genre',[GenreController::class,'index'])->name('genreList');
+    Route::get('/genre/create',[GenreController::class,'create'])->name('createGenre');
+    Route::post('/genre/create',[GenreController::class,'store'])->name('storeGenre');
+    Route::get('/genre/edit/{genre}',[GenreController::class,'edit'])->name('editGenre');
+    Route::post('/genre/edit/{genre}',[GenreController::class,'update'])->name('updateGenre');
+    Route::get('/genre/delete/{genre}',[GenreController::class,'destroy'])->name('deleteGenre');
 });
+
 

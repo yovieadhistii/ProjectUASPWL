@@ -56,14 +56,6 @@
                 </div>
             </div>
 
-            <div class="input-group mb-3">
-                <input id="telp" type="text" class="form-control" placeholder="Telepon"
-                       name="telp" required autocomplete="telepon">
-                <div class="input-group-append input-group-text">
-                    <span class="fa fa-phone"></span>
-                </div>
-            </div>
-
             <div class="row">
                 <div class="col-4 offset-8">
                     <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Register') }}</button>
