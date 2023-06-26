@@ -16,7 +16,7 @@
                 <img src="{{asset('img/user-photo-default.png')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{Auth::user()->name}}</a>
+                <a href="{{route('profil')}}" class="d-block">{{Auth::user()->nama}} | {{Auth::user()->role}}</a>
             </div>
         </div>
         @endauth
@@ -24,16 +24,16 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+{{--                <li class="nav-item">--}}
+{{--                    <a href="{{route('dashboard')}}" class="nav-link">--}}
+{{--                        <i class="nav-icon fa fa-dashboard"></i>--}}
+{{--                        <p>Dashboard</p>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
-                    <a href="{{route('dashboard')}}" class="nav-link">
+                    <a href="{{route('dashboardmahasiswa')}}" class="nav-link">
                         <i class="nav-icon fa fa-dashboard"></i>
                         <p>Dashboard</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('genreList')}}" class="nav-link">
-                        <i class="nav-icon fa fa-anchor"></i>
-                        <p>Genre Management</p>
                     </a>
                 </li>
                 <li class="nav-item">

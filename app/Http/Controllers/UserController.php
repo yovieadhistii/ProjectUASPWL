@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\MkTawar;
 use App\User;
-use Illuminate\Http\Request;
+use App\ProgramStudi;
+Use App\Count;
+Use App\MataKuliah;
+Use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -25,11 +28,23 @@ class UserController extends Controller
     }
     public function profil()
     {
+      
         return view('mahasiswa.profil');
     }
     public function index_prodi()
     {
-        return view('prodi.dashboard');
+        $user = Auth::user();
+        $data = Count::all();
+        $programStudiKode = $user->program_studi_kode_prodi;
+        $namaProgramStudi = ProgramStudi::where('kode_prodi', $programStudiKode)->value('nama');   
+        $kodeMataKuliah = ProgramStudi::where('kode_prodi', $programStudiKode)->value('kode_prodi');   
+          
+        return view('prodi.dashboard',[
+            'counts'=> $data,
+            'namaProgramStudi' => $namaProgramStudi,
+            'kodeMataKuliah' =>  $kodeMataKuliah,
+        ]);
+ 
     }
     public function perwalian()
     {

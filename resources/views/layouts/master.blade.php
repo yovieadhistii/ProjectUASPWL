@@ -10,6 +10,7 @@
 
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="{{asset('css/fontawesome.min.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<!-- Theme style -->
 	<link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
 	<!-- Google Font: Source Sans Pro -->
@@ -20,9 +21,13 @@
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
 	<div class="wrapper">
+        @include('layouts.navbar')
+        @if (Session::get('IsProdi'));
+            @include('layouts.sidebarprodi')
+        @else
+            @include('layouts.sidebar')
+        @endif
 
-		@include('layouts.navbar')
-		@include('layouts.sidebar')
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">

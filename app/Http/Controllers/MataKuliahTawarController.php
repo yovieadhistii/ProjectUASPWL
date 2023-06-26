@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\MataKuliah;
+use App\MkTawar;
 use Illuminate\Http\Request;
 use App\ProgramStudi;
 Use App\User;
-class MataKuliahController extends Controller
+class MataKuliahTawarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +17,21 @@ class MataKuliahController extends Controller
      */
     public function index()
     {
-        $datamk = MataKuliah::all();
-        return view('matkul.dashboard',[
-            'matkuls'=> $datamk
+        $user = Auth::user();
+        $programStudiKode = $user->program_studi_kode_prodi;
+        $namaProgramStudi = ProgramStudi::where('kode_prodi', $programStudiKode)->value('nama'); 
+        $datamktawar = MkTawar::all();
+        $extractedValue = MkTawar::join('mata_kuliah', 'mata_kuliah.id', '=', 'mk_tawar.mata_kuliah_kode')
+        ->select("*")
+        ->where('program_studi_kode_prodi', $programStudiKode)
+        ->get();
+
+         return view('mktawar.dashboard',[
+             'mktawars'=> $extractedValue,
+             'namaProgramStudia' => $namaProgramStudi,
+             'programStudiKode' => $programStudiKode
         ]);
+            // dd($datamktawar, $namaProgramStudi,$extractedValue);
     }
 
     public function lihatMataKuliah($program_studi_kode_prodi)
@@ -44,10 +56,12 @@ class MataKuliahController extends Controller
      */
     public function create($program_studi_kode_prodi)
     {  
-        
-        return view('matkul.create', [
-            'kodeMataKuliaha' => $program_studi_kode_prodi,
-        ]);
+        $kodeMataKuliah = MataKuliah::where('program_studi_kode_prodi', $program_studi_kode_prodi)->pluck('id','nama');
+         return view('mktawar.create', [
+             'kodeMataKuliaha' => $program_studi_kode_prodi,
+             'kodeMataKuliahs' => $kodeMataKuliah,
+         ]);
+        // dd($program_studi_kode_prodi,$kodeMataKuliah);
     }
 
     /**
@@ -56,9 +70,27 @@ class MataKuliahController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request , $program_studi_kode_prodi, $kodeMataKuliah)
+    public function store(Request $request , $program_studi_kode_prodi)
     {
-//
+        $validatedData = validator($request->all(),[
+            'idMK' => 'required|string|max:100',
+            'kelas' => 'required|string|max:100',
+            'tahunAkademik' => 'required|string|max:100',
+            'jadwal' => 'required|string|max:100',
+            'ruangan' => 'required|string|max:100',
+            'maksPeserta' => 'required|string|max:100',
+            'tipeMK' => 'required|string|max:100',
+        ])->validate();
+        $mkTawar = new MkTawar();
+        $mkTawar -> mata_kuliah_kode = $validatedData['idMK'];
+        $mkTawar -> kelas = $validatedData['kelas'];
+        $mkTawar -> tahun_akademik_id = $validatedData['tahunAkademik'];
+        $mkTawar -> jadwal = $validatedData['jadwal'];
+        $mkTawar -> ruangan = $validatedData['ruangan'];
+        $mkTawar -> max_peserta = $validatedData['maksPeserta'];
+        $mkTawar -> tipe = $validatedData['tipeMK'];
+        $mkTawar -> save(); 
+        return redirect(route('lihatMKTawar',['id'=>$program_studi_kode_prodi]));
     }
 
     /**
@@ -125,16 +157,15 @@ class MataKuliahController extends Controller
      * @param  \App\MataKuliah  $mataKuliah
      * @return \Illuminate\Http\Response
      */
-    public function destroy($program_studi_kode_prodi, $kodeMataKuliah)
+    public function destroy($matkulkode,$kelasmatkul,$tipematkul)
     {
-        // dd($program_studi_kode_prodi, $kodeMataKuliah);
-        $mataKuliah = MataKuliah::where('program_studi_kode_prodi', $program_studi_kode_prodi)
-            ->where('id', $kodeMataKuliah);
+        $mataKuliahTawar = MkTawar::where('mata_kuliah_kode', $matkulkode)->where('kelas', $kelasmatkul)->where('tipe', $tipematkul)->get();
     
-        if ($mataKuliah) {
-            $mataKuliah->delete();
-        }
-    
-        return redirect()->route('lihatMataKuliah', ['program_studi_kode_prodi' => $program_studi_kode_prodi]);
+        $mataKuliahTawar->each(function ($item) {
+            $item->delete();
+        });
+        
+        //dd($matkulkode,$kelasmatkul,$tipematkul,$mataKuliahTawar);
+        return redirect()->route('lihatMKTawar');
     }
 }
