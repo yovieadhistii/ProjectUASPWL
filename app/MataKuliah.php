@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class MataKuliah extends Model
 {
     protected $table = 'mata_kuliah';
-    protected $primaryKey = 'id';
     public $incrementing = false;
+    protected $keyType = 'string';
+
     public function program_studi(): BelongsTo
     {
         return $this->belongsTo(ProgramStudi::class);
@@ -20,5 +21,4 @@ class MataKuliah extends Model
     {
         return $this->hasMany(MkTawar::class);
     }
-  
 }

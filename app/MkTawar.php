@@ -14,11 +14,11 @@ class MkTawar extends Model
 
     public function tahun_akademik(): BelongsTo
     {
-        return $this->belongsTo(TahunAkademik::class);
+        return $this->belongsTo(TahunAkademik::class,'tahun_akademik_id','id');
     }
     public function mata_kuliah(): BelongsTo
     {
-        return $this->belongsTo(MataKuliah::class,'mata_kuliah_kode','kode');
+        return $this->belongsTo(MataKuliah::class,'mata_kuliah_kode','id');
     }
     public function user(): BelongsToMany
     {
