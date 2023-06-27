@@ -19,14 +19,22 @@ class PerwalianController extends Controller
     public function index()
     {
         $user=Auth::user()->id;
+        $usera=Auth::user();
+        $programStudiKode = $usera->program_studi_kode_prodi;
         $tahun = TahunAkademik::where('status','aktif')->first('id')->id;
         $matkul = MkTawar::with('mata_kuliah','user')->where('tahun_akademik_id',$tahun)->get()->groupBy('mata_kuliah_kode');
-        $semester=MataKuliah::all()->groupBy('semester');
+        $matkul2 = MkTawar::join('mata_kuliah', 'mata_kuliah.id', '=', 'mk_tawar.mata_kuliah_kode') ->select("*")->where('program_studi_kode_prodi', $programStudiKode)->where('tahun_akademik_id',$tahun) ->get()->groupBy('mata_kuliah_kode');
+        // $semester=MataKuliah::all()->groupBy('semester');
+        $semester = MataKuliah::all()->groupBy('semester')->sortBy(function ($items, $key) {
+            return $key;
+        });
+        
+        $semester->values()->all();
         $status=User::with('mk_tawar')->where('id',$user)->get();
-//        dd($status);
+        //dd( $user,$status,$matkul2,$tahun,$semester);
         return view('mahasiswa.perwalian', [
             'tahun' => $tahun,
-            'matkuls'=> $matkul,
+            'matkuls'=> $matkul2,
             'semesters'=>$semester,
             'status'=>$status
         ]);

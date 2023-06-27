@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <label for="semester">Semester</label>
-                        <input type="semester" id="semester" name="semester" class="form-control"  placeholder="Ex : 4" max="8">
+                        <input type="number" id="semester" name="semester" class="form-control"  placeholder="Ex : 4" max="8">
                     </div>
                     <div class="text-right">
                         <a href="{{ route('lihatMataKuliah',['kode' => $kodeMataKuliaha])}}" class="btn btn-outline-secondary mr-2" role="button">Cancel</a>

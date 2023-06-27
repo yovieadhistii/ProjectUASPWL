@@ -11,9 +11,6 @@ class MataKuliah extends Model
     protected $table = 'mata_kuliah';
     public $incrementing = false;
     protected $keyType = 'string';
-    protected $fillable = [
-        'nama'
-    ];
 
     public function program_studi(): BelongsTo
     {

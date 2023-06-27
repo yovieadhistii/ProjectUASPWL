@@ -8,6 +8,7 @@ use App\MkTawar;
 use Illuminate\Http\Request;
 use App\ProgramStudi;
 Use App\User;
+Use App\TahunAkademik;
 class MataKuliahTawarController extends Controller
 {
     /**
@@ -20,7 +21,9 @@ class MataKuliahTawarController extends Controller
         $user = Auth::user();
         $programStudiKode = $user->program_studi_kode_prodi;
         $namaProgramStudi = ProgramStudi::where('kode_prodi', $programStudiKode)->value('nama'); 
+        $tahunAkademik = TahunAkademik::where('status', 'aktif')->first();
         $datamktawar = MkTawar::all();
+        $statusa = $tahunAkademik ? $tahunAkademik->id : "";
         $extractedValue = MkTawar::join('mata_kuliah', 'mata_kuliah.id', '=', 'mk_tawar.mata_kuliah_kode')
         ->select("*")
         ->where('program_studi_kode_prodi', $programStudiKode)
@@ -29,9 +32,10 @@ class MataKuliahTawarController extends Controller
          return view('mktawar.dashboard',[
              'mktawars'=> $extractedValue,
              'namaProgramStudia' => $namaProgramStudi,
-             'programStudiKode' => $programStudiKode
+             'programStudiKode' => $programStudiKode,
+             'status' => $statusa
         ]);
-            // dd($datamktawar, $namaProgramStudi,$extractedValue);
+        // dd($statusa,$datamktawar, $namaProgramStudi,$extractedValue);
     }
 
     public function lihatMataKuliah($program_studi_kode_prodi)
@@ -166,6 +170,14 @@ class MataKuliahTawarController extends Controller
         });
         
         //dd($matkulkode,$kelasmatkul,$tipematkul,$mataKuliahTawar);
+        return redirect()->route('lihatMKTawar');
+    }
+    public function updateStatus(Request $request)
+    {
+        $status = $request->input('status');
+
+        TahunAkademik::where('status', 'aktif')->update(['status' => '']);
+        TahunAkademik::where('id', $status)->update(['status' => 'aktif']);
         return redirect()->route('lihatMKTawar');
     }
 }

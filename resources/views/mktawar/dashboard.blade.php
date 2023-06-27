@@ -21,19 +21,30 @@
 		<div class="card-header text-right">
 			<a href="{{ route('createMKTawar',['id' => $programStudiKode]) }}" class="btn btn-warning" role="button">Tambah Mata Kuliah Tawar Baru</a>
 		</div>
+
+		<div class="card my-3 ">
+				<form action="{{ route('updateStatus') }}" method="POST">
+					@csrf
+					<select class="form-select" name="status" onchange="this.form.submit()">
+						<option value="Genap 2022/2023" {{ $status === 'Genap 2022/2023' ? 'selected' : '' }}>Genap 2022/2023</option>
+						<option value="Ganjil 2023/2024" {{ $status === 'Ganjil 2023/2024' ? 'selected' : '' }}>Ganjil 2023/2024</option>
+					</select>
+				</form>
+		</div>
+
 		<div class="card">
 			<div class="card-body p-3">
 				<table class="table-hover mb-0 w-100">
 					<thead>
 						<tr>
-							<th style="font-size:2em;">Mata Kuliah </th>
-							<th style="font-size:2em;">Nama</th>
-							<th style="font-size:2em;">Kelas</th>
-							<th style="font-size:2em;">Tahun Akademik</th>
-                            <th style="font-size:2em;">Jadwal</th>
-							<th style="font-size:2em;">Ruangan</th>
-							<th style="font-size:2em;">Max Peserta</th>
-                            <th style="font-size:2em;">Tipe</th>
+							<th style="font-size:1em;">Mata Kuliah </th>
+							<th style="font-size:1em;">Nama</th>
+							<th style="font-size:1em;">Kelas</th>
+							<th style="font-size:1em;">Tahun Akademik</th>
+                            <th style="font-size:1em;">Jadwal</th>
+							<th style="font-size:1em;">Ruangan</th>
+							<th style="font-size:1em;">Max Peserta</th>
+                            <th style="font-size:1em;">Tipe</th>
 						</tr>
 					</thead>
 					<tbody>

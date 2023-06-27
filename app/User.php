@@ -49,4 +49,8 @@ class User extends Authenticatable
         return $this->belongsTo(ProgramStudi::class);
     }
 
+    public function program_studi_nama()
+    {
+        return $this->belongsTo(ProgramStudi::class, 'program_studi_kode_prodi', 'kode_prodi');
+    }
 }
