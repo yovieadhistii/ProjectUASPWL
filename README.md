@@ -1,10 +1,3 @@
-# Kelompok 4
-1. Yehezkiel David S. - 2172003
-2. Yovie Adhisti M. - 2172005
-3. Laurentius Gusti O. P. Y. - 2172028
-4. Veronica Marcella A. S. - 2172042
-
-
 # Laravel AdminLTE
 
 This is a ready to use AdminLTE template for Laravel 5.8
