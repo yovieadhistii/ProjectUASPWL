@@ -6,12 +6,12 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1 class="m-0 text-dark">Starter</h1>
+				<h1 class="m-0 text-dark">Perwalian</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-					<li class="breadcrumb-item active">Starter</li>
+					<li class="breadcrumb-item active">Perwalian</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -22,38 +22,115 @@
 <!-- Main content -->
 <div class="content">
 	<div class="container-fluid">
-
+        {{$tahun}}
 		{{-- main content here --}}
-        <div class="card">
-            <div class="card-header text-right">
-                <a href="{{route('createGenre')}}" class="btn btn-primary" role="button">Open Genre Form</a>
-            </div>
-            <div class="card-body p-0">
-                <table class="table table-hover mb-0">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($genres as $genre)
-                        <tr>
-                            <td>{{$genre->id}}</td>
-                            <td>{{$genre->name}}</td>
-                            <td>
-                                <a href="{{route('editGenre',['id'=>$genre->id])}}" class="btn btn-warning" role="button">Edit</a>
-                                <a href="{{route('deleteGenre',['id'=>$genre->id])}}" class="btn btn-warning" role="button">Delete</a>
-                            </td>
-                        </tr>
+        <form method="POST" action="{{ route('checkoutDKBS') }}" onsubmit="doValidate">
+            @csrf
+        @if(($status[0]->mk_tawar->where('tahun_akademik_id',$tahun))=='[]')
+        <div class="accordion" id="accordionExample">
+        @foreach($semesters as $semester=>$mk)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Semester {{$semester}}
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="accordion" id="s{{$semester}}">
+                                @foreach($matkuls as $matkul=>$jadwals)
+                                    @if(($jadwals[0]->mata_kuliah->semester)==$semester)
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#{{$jadwals[0]->id}}" aria-expanded="true" aria-controls="{{$jadwals[0]->id}}">
+                                                    {{$matkul}} {{$jadwals[0]->mata_kuliah->nama}}
+                                                </button>
+                                            </h2>
+                                            <div id="{{$jadwals[0]->id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" >
+                                                <div class="accordion-body">
+                                                    @foreach(($jadwals->groupBy('kelas')) as $kelas=>$jadwal)
+                                                            <p>Kelas {{$kelas}}</p>
+                                                        <p class="text-danger">Tersedia : {{($jadwal[0]->max_peserta) - count($jadwal[0]->user)}}</p>
+                                                        <div class="form-check">
+                                                            <input class="{{$matkul}} form-check-input" type="checkbox" value="{{$kelas}}"  name="{{$matkul}}" data-sks="{{$jadwal[0]->mata_kuliah->sks}}" onclick="pilih(this);">
+                                                            <table class="table">
+                                                                <tr>
+                                                                    <th scope="col">Tipe</th>
+                                                                    <th scope="col">Jadwal</th>
+                                                                    <th scope="col">Ruangan</th>
+                                                                </tr>
+                                                            @foreach($jadwal as $detail)
+                                                                <tr>
+                                                                    <td>{{$detail->tipe}}</td>
+                                                                    <td>{{$detail->jadwal}}</td>
+                                                                    <td>{{$detail->ruangan}}</td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </table>
 
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-	</div><!-- /.container-fluid -->
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                            </div>
+                        </div>
+                    </div>
+{{--                    Daftar Matkul--}}
+
+                </div>
+
+        @endforeach
+	</div>
+                <button type="submit" class="btn btn-primary my-3">Submit</button>
+        @else
+            <h1>Anda Sudah Melakukan Perwalian</h1>
+        @endif
+
+        </form>
+            <!-- /.container-fluid -->
+    </div>
 </div>
 <!-- /.content -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // $(".cb").change(function() {
+        //
+        //     $(".cb").prop('checked', false);
+        //     // if($(this).prop('checked')==false){
+        //     //     $(this).prop('checked', true);
+        //     // }
+        // });
+        let sks=0;
+        function pilih(kelas) {
+            if($(kelas).prop('checked')==false){
+                // alert("aa")
+                $(kelas).prop('checked', false);
+                sks-=parseInt($(kelas).data('sks'))
+            }
+            else{
+                // alert("bb")
+                $name=$(kelas).attr("name")
+                $('.'+$name).prop('checked', false);
+                $(kelas).prop('checked', true);
+                sks+=parseInt($(kelas).data('sks'))
+
+            }
+
+
+        };
+        function doValidate(event) {
+            if(sks>24){
+                event.preventDefault();
+            }
+
+            // validate your inputs
+        };
+
+
+    </script>
 @endsection

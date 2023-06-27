@@ -37,6 +37,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('perwalian')}}" class="nav-link">
+                        <i class="nav-icon fa fa-dashboard"></i>
+                        <p>Perwalian</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form id="logout-form" action="{{route('logout')}}" method="post">
                         @csrf
                     </form>
@@ -45,6 +51,7 @@
                         <p>Logout</p>
                     </a>
                 </li>
+
                 {{-- <li class="nav-item has-treeview menu-open">
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fa fa-dashboard"></i>
