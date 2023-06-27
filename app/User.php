@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'email', 'password','telepon','role','program_studi_kode_prodi','alamat','tanggal_lahir'
+        'nama', 'email', 'password','telepon','role','program_studi_kode_prodi'
     ];
 
     /**
@@ -49,8 +49,4 @@ class User extends Authenticatable
         return $this->belongsTo(ProgramStudi::class);
     }
 
-    public function program_studi_nama()
-    {
-        return $this->belongsTo(ProgramStudi::class, 'program_studi_kode_prodi', 'kode_prodi');
-    }
 }

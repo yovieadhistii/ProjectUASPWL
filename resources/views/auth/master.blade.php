@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     @yield('addCss')
 </head>
@@ -25,7 +26,7 @@
         <div class="login-logo">
             {{config('app.name')}}
         </div>
-        
+
         @yield('content')
     </div>
     <!-- /.login-box -->
