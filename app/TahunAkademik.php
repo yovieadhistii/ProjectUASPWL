@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class TahunAkademik extends Model
 {
-    protected $table = 'tahun_akademi';
+    protected $table = 'tahun_akademik';
+
+    public $incrementing = false;
+//    protected $keyType = 'string';
+
     public function mk_tawar(): HasMany
 
     {
-        return $this->hasMany(MkTawar::class);
+        return $this->hasMany(MkTawar::class,'tahun_akademik_id','id');
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Count;
 use App\MkTawar;
-use App\User;
 use App\ProgramStudi;
-Use App\Count;
-Use App\MataKuliah;
-Use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -28,7 +27,6 @@ class UserController extends Controller
     }
     public function profil()
     {
-
         return view('mahasiswa.profil');
     }
     public function index_prodi()
@@ -38,13 +36,11 @@ class UserController extends Controller
         $programStudiKode = $user->program_studi_kode_prodi;
         $namaProgramStudi = ProgramStudi::where('kode_prodi', $programStudiKode)->value('nama');
         $kodeMataKuliah = ProgramStudi::where('kode_prodi', $programStudiKode)->value('kode_prodi');
-
         return view('prodi.dashboard',[
             'counts'=> $data,
             'namaProgramStudi' => $namaProgramStudi,
             'kodeMataKuliah' =>  $kodeMataKuliah,
         ]);
-
     }
     public function perwalian()
     {
@@ -105,19 +101,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //dd($user);
-        $validateData = validator($request->all(),[
+        return $request->file('image')->store('profile-photo');
+        $validateData = $request->validate([
             'nama' => 'required|max:255',
-            'alamat' => 'required|max:255',
-            'email' => 'required|max:255',
             'phone'=>'required|max:255',
-            'birthday' => 'required|max:255',
-        ])->validate();
+        ]);
         $user->nama = $validateData['nama'];
-        $user->alamat = $validateData['alamat'];
-        $user->email = $validateData['email'];
         $user->telepon = $validateData['phone'];
-        $user->tanggal_lahir = $validateData['birthday'];
         $user->save();
         return redirect(route('dashboardmahasiswa'));
     }
