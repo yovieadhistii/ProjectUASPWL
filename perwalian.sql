@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2023 at 12:10 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.4.7
+-- Generation Time: Jun 27, 2023 at 03:09 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `count_mhs_mk` (
 CREATE TABLE `dkbs` (
   `users_id` varchar(7) NOT NULL,
   `mk_tawar_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `dkbs`
@@ -58,51 +58,67 @@ INSERT INTO `dkbs` (`users_id`, `mk_tawar_id`) VALUES
 --
 
 CREATE TABLE `mata_kuliah` (
-  `kode` varchar(45) NOT NULL,
+  `id` varchar(45) NOT NULL,
   `nama` varchar(45) NOT NULL,
   `sks` int(2) NOT NULL,
   `semester` int(2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `program_studi_kode_prodi` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `mata_kuliah`
 --
 
-INSERT INTO `mata_kuliah` (`kode`, `nama`, `sks`, `semester`, `created_at`, `updated_at`, `program_studi_kode_prodi`) VALUES
+INSERT INTO `mata_kuliah` (`id`, `nama`, `sks`, `semester`, `created_at`, `updated_at`, `program_studi_kode_prodi`) VALUES
 ('BS101', 'Sistem Informasi', 3, 1, NULL, NULL, '73'),
 ('BS102', 'Sistem Pengarsipan dan Akses', 3, 1, NULL, NULL, '73'),
 ('BS103', 'Pemograman Dasar', 3, 1, NULL, NULL, '73'),
 ('BS104', 'Logika Informatika', 2, 1, NULL, NULL, '73'),
 ('BS106', 'Bahasa Inggris I', 2, 1, NULL, NULL, '73'),
+('BS201', 'Arsitektur Bisnis', 3, 2, NULL, NULL, '73'),
+('BS203', 'Basis Data', 3, 2, NULL, NULL, '73'),
 ('BS301', 'Struktur Data', 3, 3, NULL, NULL, '73'),
 ('BS302', 'Sistem Informasi SDM * (SAP HR)', 4, 3, NULL, NULL, '73'),
 ('BS303', 'Basis Data Lanjut', 3, 3, NULL, NULL, '73'),
 ('BS304', 'Jaringan Komputer', 4, 3, NULL, NULL, '73'),
+('BS401', 'Konsep E-Bisnis', 3, 4, NULL, NULL, '73'),
+('BS406', 'Kewirausahaan Teknologi Informasi', 2, 4, NULL, NULL, '73'),
 ('BS501', 'Pemodelan Sistem Informasi', 3, 5, NULL, NULL, '73'),
 ('BS502', 'Manajemen Proyek * (SAP MLM)', 4, 5, NULL, NULL, '73'),
 ('BS503', 'Pemograman Web Lanjut', 4, 5, NULL, NULL, '73'),
+('BS601', 'Pemodelan SI Lanjut', 3, 6, NULL, NULL, '73'),
+('BS602', 'Implementasi dan Integrasi Sistem', 3, 6, NULL, NULL, '73'),
 ('BS701', 'Kecerdasan Bisnis (BI)', 3, 7, NULL, NULL, '73'),
 ('BS702', 'Pemasaran Online', 3, 7, NULL, NULL, '73'),
+('BS801', 'Kapita Selekta', 3, 8, NULL, NULL, '73'),
+('BS802', 'Tugas Akhir', 4, 8, NULL, NULL, '73'),
 ('IN212', 'Web Dasar', 3, 1, NULL, NULL, '72'),
 ('IN214', 'Pengantar Aplikasi Komputer', 2, 1, NULL, NULL, '72'),
 ('IN215', 'Sibernetika', 2, 1, NULL, NULL, '72'),
 ('IN216', 'Computational Thinking', 2, 1, NULL, NULL, '72'),
+('IN221', 'Arsitektur dan Keamanan Jaringan', 3, 2, NULL, NULL, '72'),
+('IN222', 'Arsitektur Komputer Modern', 3, 2, NULL, NULL, '72'),
 ('IN230', 'Rekayasa Perangkat Lunak', 3, 3, NULL, NULL, '72'),
 ('IN231', 'Teknologi Multimedia', 2, 3, NULL, NULL, '72'),
 ('IN232', 'Matematika Diskrit', 3, 3, NULL, NULL, '72'),
 ('IN233', 'Algoritma dan Struktur Data', 4, 3, NULL, NULL, '72'),
 ('IN240', 'Pemrograman Web Lanjut', 4, 4, NULL, NULL, '72'),
+('IN241', 'Statistika', 3, 4, NULL, NULL, '72'),
+('IN243', 'Sistem Operasi Komputer', 2, 1, NULL, NULL, '72'),
 ('IN250', 'Manajemen Proyek', 3, 5, NULL, NULL, '72'),
 ('IN252', 'Desain Antarmuka', 2, 5, NULL, NULL, '72'),
 ('IN253', 'Grafika Komputer', 3, 5, NULL, NULL, '72'),
 ('IN254', 'Proyek Perangkat Lunak', 3, 5, NULL, NULL, '72'),
+('IN260', 'Metode Penelitian Informatika', 2, 6, NULL, NULL, '72'),
+('IN261', 'Start-up Technopreneur', 3, 6, NULL, NULL, '72'),
 ('IN262', 'Pemrograman Mobile', 4, 8, NULL, NULL, '72'),
 ('IN263', 'Competitive Programming', 4, 8, NULL, NULL, '72'),
 ('IN264', 'Web Semantik', 4, 8, NULL, NULL, '72'),
-('IN270', 'Kerja Praktik', 4, 7, NULL, NULL, '72');
+('IN270', 'Kerja Praktik', 4, 7, NULL, NULL, '72'),
+('IN280', 'Seminar Tugas Akhir', 2, 8, NULL, NULL, '72'),
+('IN281', 'Tugas Akhir', 4, 8, NULL, NULL, '72');
 
 -- --------------------------------------------------------
 
@@ -121,7 +137,7 @@ CREATE TABLE `mk_tawar` (
   `tipe` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `mk_tawar`
@@ -185,7 +201,33 @@ INSERT INTO `mk_tawar` (`id`, `mata_kuliah_kode`, `kelas`, `tahun_akademik_id`, 
 (57, 'IN263', 'A', 'Ganjil 2023/2024', 'Senin, 15:00 - 17:00', 'DB', 25, 'Praktikum', NULL, NULL),
 (58, 'IN264', 'A', 'Ganjil 2023/2024', 'Kamis, 09:30 - 12:00', 'ADV 2', 30, 'Teori', NULL, NULL),
 (59, 'IN264', 'A', 'Ganjil 2023/2024', 'Jumat, 09:30 - 12:00', 'DB', 30, 'Praktikum', NULL, NULL),
-(60, 'IN270', 'A', 'Ganjil 2023/2024', 'Selasa, 11:00 - 13:00', 'INT 1', 30, 'Teori', NULL, NULL);
+(60, 'IN270', 'A', 'Ganjil 2023/2024', 'Selasa, 11:00 - 13:00', 'INT 1', 30, 'Teori', NULL, NULL),
+(61, 'BS201', 'A', 'Ganjil 2023/2024', 'Jumat, 13:00 - 15:00', 'PROG 2', 30, 'Teori', NULL, NULL),
+(62, 'BS201', 'B', 'Ganjil 2023/2024', 'Jumat, 15:00 - 17:00', 'PROG 2', 30, 'Teori', NULL, NULL),
+(63, 'BS203', 'A', 'Ganjil 2023/2024', 'Selasa, 10:00 - 12:00', 'ENT 2', 20, 'Teori', NULL, NULL),
+(64, 'BS203', 'B', 'Ganjil 2023/2024', 'Rabu, 10:00 - 12:00', 'ENT 1', 20, 'Teori', NULL, NULL),
+(65, 'BS401', 'A', 'Ganjil 2023/2024', 'Rabu, 07:00 - 09:30', 'PROG 1', 25, 'Teori', NULL, NULL),
+(66, 'BS401', 'B', 'Ganjil 2023/2024', 'Kamis, 07:00 - 09:30', 'PROG 1', 25, 'Teori', NULL, NULL),
+(67, 'BS406', 'A', 'Ganjil 2023/2024', 'Kamis, 10:00 - 12:00', 'NET', 25, 'Teori', NULL, NULL),
+(68, 'BS406', 'B', 'Ganjil 2023/2024', 'Kamis, 14:00 - 16:00', 'NET', 25, 'Teori', NULL, NULL),
+(69, 'BS601', 'A', 'Ganjil 2023/2024', 'Selasa, 07:00 - 09:00', 'PROG 1', 30, 'Teori', NULL, NULL),
+(70, 'BS101', 'B', 'Ganjil 2023/2024', 'Selasa, 07:00 - 09:00', 'NET', 25, 'Teori', NULL, NULL),
+(71, 'BS301', 'B', 'Ganjil 2023/2024', 'Rabu, 09:30 - 12:00', 'NET', 25, 'Teori', NULL, NULL),
+(72, 'BS501', 'B', 'Ganjil 2023/2024', 'Kamis, 07:00 - 09:30', 'ENT 1', 30, 'Teori', NULL, NULL),
+(73, 'BS503', 'B', 'Ganjil 2023/2024', 'Selasa, 10:00 - 12:00', 'ENT 2', 30, 'Teori', NULL, NULL),
+(74, 'BS503', 'B', 'Ganjil 2023/2024', 'Selasa, 13:00 - 15:00', 'ENT 2', 30, 'Praktikum', NULL, NULL),
+(75, 'IN221', 'A', 'Ganjil 2023/2024', 'Senin, 09:30 - 12:00', 'DB', 30, 'Teori', NULL, NULL),
+(76, 'IN221', 'B', 'Ganjil 2023/2024', 'Selasa, 09:30 - 12:00', 'DB', 30, 'Teori', NULL, NULL),
+(77, 'IN222', 'A', 'Ganjil 2023/2024', 'Rabu, 09:00 - 11:30', 'INT 1', 25, 'Teori', NULL, NULL),
+(78, 'IN222', 'B', 'Ganjil 2023/2024', 'Rabu, 13:00 - 14:30', 'INT 1', 25, 'Teori', NULL, NULL),
+(79, 'IN241', 'A', 'Ganjil 2023/2024', 'Senin, 09:30 - 12:00', 'ADV 1', 25, 'Teori', NULL, NULL),
+(80, 'IN241', 'B', 'Ganjil 2023/2024', 'Selasa, 13:00 - 15:00', 'ADV 1', 25, 'Teori', NULL, NULL),
+(81, 'IN260', 'A', 'Ganjil 2023/2024', 'Rabu, 09:30 - 12:00', 'ADV 2', 25, 'Teori', NULL, NULL),
+(82, 'IN260', 'B', 'Ganjil 2023/2024', 'Kamis, 09:30 - 12:00', 'DB', 20, 'Teori', NULL, NULL),
+(83, 'IN261', 'A', 'Ganjil 2023/2024', 'Selasa, 07:00 - 09:00', 'INT 1', 25, 'Teori', NULL, NULL),
+(84, 'IN280', 'A', 'Ganjil 2023/2024', 'MMD', 'Jumat, 15:00 - 17:00', 30, 'Teori', NULL, NULL),
+(85, 'IN281', 'A', 'Ganjil 2023/2024', 'Rabu, 15:00 - 17:00', 'INT 1', 30, 'Teori', NULL, NULL),
+(86, 'IN281', 'B', 'Ganjil 2023/2024', 'Kamis, 15:00 - 17:00', 'ADV 4', 25, 'Teori', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -199,7 +241,7 @@ CREATE TABLE `program_studi` (
   `website` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `program_studi`
@@ -221,7 +263,7 @@ CREATE TABLE `tahun_akademik` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tahun_akademik`
@@ -253,7 +295,7 @@ CREATE TABLE `users` (
   `program_studi_kode_prodi` varchar(45) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -261,6 +303,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama`, `alamat`, `kota`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `email`, `password`, `telepon`, `role`, `foto`, `program_studi_kode_prodi`, `created_at`, `updated_at`) VALUES
 ('2172028', 'Laurentius Gusti Ontoseno Panata Yudha', 'Jln. Adi Sedap Malam No. 55', 'Bandung', '08/09/2003', 'Pria', 'Lainnya', '2172028@maranatha.ac.id', '$2y$10$3fMYWcaiTiwV8FJhSU7Ai.RQH84EmEbC0yKQ5cuBudzDdEghgpywK', '08223344', 'mahasiswa', NULL, '72', NULL, NULL),
+('2173005', 'Yovie Adhisti Mulyono', 'Jln. Taman Kopo Indah 1 Blok B-66', 'Bandung', '28/06/03', 'Wanita', 'Kristen', '2173005@maranatha.ac.id', '$2y$10$3fMYWcaiTiwV8FJhSU7Ai.RQH84EmEbC0yKQ5cuBudzDdEghgpywK', '085772279697', 'mahasiswa', NULL, '73', NULL, NULL),
 ('72-1', 'IFAdmin', '', '', '', '', '', 'ifAdmin@gamil.com', '$2y$10$3fMYWcaiTiwV8FJhSU7Ai.RQH84EmEbC0yKQ5cuBudzDdEghgpywK', '0895999972', 'prodi', NULL, '72', '2023-05-30 06:01:53', NULL);
 
 -- --------------------------------------------------------
@@ -270,7 +313,7 @@ INSERT INTO `users` (`id`, `nama`, `alamat`, `kota`, `tanggal_lahir`, `jenis_kel
 --
 DROP TABLE IF EXISTS `count_mhs_mk`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_mhs_mk`  AS  select (select count(0) from `users` where `users`.`role` = 'mahasiswa') AS `jumlah_mahasiswa`,(select count(0) from `mata_kuliah`) AS `jumlah_mata_kuliah` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `count_mhs_mk`  AS SELECT (select count(0) from `users` where `users`.`role` = 'mahasiswa') AS `jumlah_mahasiswa`, (select count(0) from `mata_kuliah`) AS `jumlah_mata_kuliah` ;
 
 --
 -- Indexes for dumped tables
@@ -288,7 +331,7 @@ ALTER TABLE `dkbs`
 -- Indexes for table `mata_kuliah`
 --
 ALTER TABLE `mata_kuliah`
-  ADD PRIMARY KEY (`kode`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_mata_kuliah_program_studi1_idx` (`program_studi_kode_prodi`);
 
 --
@@ -326,7 +369,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `mk_tawar`
 --
 ALTER TABLE `mk_tawar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- Constraints for dumped tables
@@ -349,7 +392,7 @@ ALTER TABLE `mata_kuliah`
 -- Constraints for table `mk_tawar`
 --
 ALTER TABLE `mk_tawar`
-  ADD CONSTRAINT `fk_mata_kuliah_has_tahun_akademik_mata_kuliah1` FOREIGN KEY (`mata_kuliah_kode`) REFERENCES `mata_kuliah` (`kode`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_mata_kuliah_has_tahun_akademik_mata_kuliah1` FOREIGN KEY (`mata_kuliah_kode`) REFERENCES `mata_kuliah` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_mata_kuliah_has_tahun_akademik_tahun_akademik1` FOREIGN KEY (`tahun_akademik_id`) REFERENCES `tahun_akademik` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
